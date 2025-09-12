@@ -1,0 +1,6 @@
+preload = $HOME/Downloads/jap.jpg
+preload = $HOME/Downloads/Wow.jpg
+splash =true
+
+wallpaper = eDP-1, $HOME/Downloads/jap.jpg
+wallpaper = DP-5, $HOME/Downloads/Wow.jpg
