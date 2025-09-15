@@ -1,0 +1,7 @@
+vim.api.nvim_set_keymap('n', '<Leader>gs', '<CMD>G<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<Leader>gq', '<CMD>G<CR><CMD>q<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<Leader>gw', '<CMD>Gwrite<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<Leader>gr', '<CMD>Gread<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<Leader>gh', '<CMD>diffget //2<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<Leader>gl', '<CMD>diffget //3<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<Leader>gp', '<CMD>Git push<CR>', {noremap = true})
