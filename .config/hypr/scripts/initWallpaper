@@ -23,7 +23,6 @@ fi
 
 pywalfox update
 pywal-discord -t default
-#wal-telegram --wal
 
 . $HOME/.config/mako/update-colors.sh
 . $HOME/.config/spicetify/Themes/Pywal/update-colors.sh

@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 
 export PATH="${PATH}:${HOME}/.local/bin/"
 
@@ -21,7 +22,7 @@ elif [[ "$(<~/.cache/wal/mode )" = "light" ]]; then
   wal -i ${DIR}/${RANDOMPICS} -l --cols16
 fi
 
-pywal-discord -t default
-pywalfox update
+#pywal-discord -t default
+#pywalfox update
 
-. $HOME/.config/mako/update-colors.sh
+#. $HOME/.config/mako/update-colors.sh
