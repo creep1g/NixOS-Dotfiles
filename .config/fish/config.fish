@@ -3,7 +3,7 @@ fish_vi_key_bindings
 _pure_set_default pure_symbol_prompt "λ"
 _pure_set_default pure_symbol_reverse_prompt "Λ" # used for VI mode
 
-set -gx PATH /home/gilli/.local/bin /usr/bin /home/gilli/.cargo/bin /home/gilli/.gem/ruby/2.7.0/bin $PATH
+set -gx PATH /home/gilli/.local/bin /usr/bin /home/gilli/.config/emacs/bin $PATH
 
 set -gx TERM xterm-256color
 
