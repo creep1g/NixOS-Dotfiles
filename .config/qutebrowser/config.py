@@ -31,7 +31,7 @@ config.load_autoconfig(True)
 ## session which was last loaded. This behavior can be customized via the
 ## `session.default_name` setting.
 ## Type: Bool
-# c.auto_save.session = False
+c.auto_save.session = False
 
 ## Backend to use to display websites. qutebrowser supports two different
 ## web rendering engines / backends, QtWebEngine and QtWebKit (not
@@ -517,7 +517,7 @@ config.load_autoconfig(True)
 ## `colors.webpage.darkmode.policy.images` to `never`.  - "With selective
 ## image inversion": qutebrowser default settings.
 ## Type: Bool
-# c.colors.webpage.darkmode.enabled = False
+c.colors.webpage.darkmode.enabled = True
 
 ## Which images to apply dark mode to.
 ## Type: String
@@ -676,7 +676,10 @@ config.load_autoconfig(True)
 
 ## Enable the ad/host blocker
 ## Type: Bool
-# c.content.blocking.enabled = True
+c.content.blocking.enabled = True
+
+config.set("content.blocking.enabled", False, "https://www.youtube.com/*")
+config.set("content.blocking.enabled", False, "https://youtube.com/*")
 
 ## Block subdomains of blocked hosts. Note: If only a single subdomain is
 ## blocked but should be allowed, consider using
@@ -718,7 +721,7 @@ config.load_autoconfig(True)
 ## given page, use the `content.blocking.enabled` setting with a URL
 ## pattern instead.
 ## Type: List of UrlPattern
-# c.content.blocking.whitelist = []
+c.content.blocking.whitelist = ["youtube.com", "https://youtube.com/", "www.youtube.com/*"]
 
 ## Enable support for the HTML 5 web application cache feature. An
 ## application cache acts like an HTTP cache in some sense. For documents
@@ -2020,7 +2023,7 @@ config.load_autoconfig(True)
 ##   - bottom
 ##   - left
 ##   - right
-# c.tabs.position = 'top'
+#c.tabs.position = 'left'
 
 ## Which tab to select when the focused tab is removed.
 ## Type: SelectOnRemove
@@ -2037,7 +2040,7 @@ config.load_autoconfig(True)
 ##   - never: Always hide the tab bar.
 ##   - multiple: Hide the tab bar if only one tab is open.
 ##   - switching: Show the tab bar when switching tabs.
-# c.tabs.show = 'always'
+c.tabs.show = 'always'
 
 ## Duration (in milliseconds) to show the tab bar before hiding it when
 ## tabs.show is set to 'switching'.
@@ -2512,5 +2515,6 @@ config.load_autoconfig(True)
 # config.bind('n', 'prompt-accept no', mode='yesno')
 # config.bind('y', 'prompt-accept yes', mode='yesno')
 c.tabs.position = "bottom"
+c.tabs.width = 150
 c.completion.shrink = True
 c.url.start_pages = ['https://creep1g.github.io/ffsp/']

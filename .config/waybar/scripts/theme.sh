@@ -2,7 +2,7 @@
 
 export PATH="${PATH}:${HOME}/.local/bin/"
 
-CURRENTIMG="$(<~/.cache/wal/wal )"
+CURRENTIMG="$(<~/.cache/wal/wal)"
 MODE=""
 
 if [[ -e "${HOME}/.cache/wal/mode" ]]; then

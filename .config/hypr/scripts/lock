@@ -2,7 +2,7 @@
 source "$HOME/.cache/wal/colors.sh"
 
 swaylock \
-#--screenshots \
+--screenshots \
 --indicator \
 --clock \
 --font 'CartographCF Nerd Font:style=Thin,Regular 40' \

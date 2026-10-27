@@ -17,8 +17,8 @@ export PATH="$PATH:$HOME/.local/bin"
 # START WALLPAPER DAEMON
 # ------------------------------
 # Only start swww if not running
-if ! pgrep -x swww-daemon >/dev/null; then
-    swww-daemon &
+if ! pgrep -x awww-daemon >/dev/null; then
+    awww-daemon &
 fi
 
 # ------------------------------
@@ -34,7 +34,7 @@ else
     RANDOM_PIC="${PICS[RANDOM % ${#PICS[@]}]}"
 
     # Set wallpaper
-    swww img "$RANDOM_PIC" \
+    awww img "$RANDOM_PIC" \
         --transition-type grow \
         --transition-fps 60 \
         --transition-duration 1.0 \
