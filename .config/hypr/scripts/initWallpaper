@@ -2,8 +2,17 @@
 
 export PATH="${PATH}:${HOME}/.local/bin/"
 
-awww-daemon
-#hyprpaper
+# awww-daemon never exits (it runs in the foreground), so it has to be
+# backgrounded or nothing below would ever run. Don't start a second one.
+if ! pgrep -x awww-daemon >/dev/null; then
+  awww-daemon >/dev/null 2>&1 &
+fi
+
+# Wait (up to ~5s) until the daemon accepts commands.
+for _ in $(seq 50); do
+  awww query >/dev/null 2>&1 && break
+  sleep 0.1
+done
 
 if [ -e "${HOME}/.cache/wal/colors" ]; then
   wal -R --cols16
@@ -27,4 +36,6 @@ pywal-discord -t default
 . $HOME/.config/mako/update-colors.sh
 . $HOME/.config/spicetify/Themes/Pywal/update-colors.sh
 #. $HOME/.config/cava/scripts/update-colors.sh
-. $HOME/.config/hypr/scripts/initWaybar
+
+# Waybar is started by its own exec-once entry (initWaybar). Do not source it
+# here: that would run a second copy of its restart loop and give two bars.

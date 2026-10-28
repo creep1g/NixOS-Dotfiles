@@ -1,12 +1,39 @@
 #!/bin/bash
 
+# Keeps exactly one waybar running and restarts it whenever its config, style
+# or the pywal colours change.
+
+# Single-instance guard: a second copy of this loop would start a second bar.
+if command -v flock >/dev/null; then
+    exec 9>"${XDG_RUNTIME_DIR:-/tmp}/initWaybar.lock"
+    flock -n 9 || exit 0
+fi
+
 CONFIG_FILES="$HOME/.config/waybar/config.json $HOME/.config/waybar/style.css $HOME/.cache/wal/colors-waybar.css"
 
-trap "pkill waybar" EXIT
+# NixOS wraps waybar (process name ".waybar-wrapped"), so match by substring
+# (no `pkill -x`).
+stop_waybar() {
+    pkill waybar
+    for _ in $(seq 30); do
+        pgrep waybar >/dev/null || return 0
+        sleep 0.1
+    done
+    pkill -9 waybar
+}
+
+trap stop_waybar EXIT
 
 while true; do
-    cp -r $HOME/.cache/wal/colors-waybar.css $HOME/.config/waybar &
-    waybar -c $HOME/.config/waybar/config.json -s $HOME/.config/waybar/style.css &
-    inotifywait -e create,modify $CONFIG_FILES
-    pkill waybar
+    # Make sure the old bar is really gone before starting the next one.
+    stop_waybar
+
+    cp -r $HOME/.cache/wal/colors-waybar.css $HOME/.config/waybar
+    # 9>&- : don't let waybar inherit (and hold) the lock.
+    waybar -c $HOME/.config/waybar/config.json -s $HOME/.config/waybar/style.css 9>&- &
+
+    inotifywait -qq -e create,modify $CONFIG_FILES
+
+    # wal writes several files in a row; let it finish before restarting.
+    sleep 0.5
 done
