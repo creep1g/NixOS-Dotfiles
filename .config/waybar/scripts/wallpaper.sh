@@ -8,8 +8,11 @@ PICS=($(ls ${DIR}))
 
 RANDOMPICS=${PICS[ $RANDOM % ${#PICS[@]} ]}
 
-if [[ $(pidof awww) ]]; then
-  pkill awww
+# Make sure the wallpaper daemon is up. (Don't `pkill awww`: that pattern also
+# matches awww-daemon and would kill the daemon this script depends on.)
+if ! pgrep -x awww-daemon >/dev/null; then
+  awww-daemon >/dev/null 2>&1 &
+  sleep 0.5
 fi
 
 awww img ${DIR}/${RANDOMPICS} --transition-type grow --transition-fps 60 --transition-duration 0.5 --transition-bezier 0.65,0,0.35,1 --transition-pos 0.794,0.972 --transition-step 1
